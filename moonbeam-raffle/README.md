@@ -99,4 +99,4 @@ MIT License with Attribution Requirement - see the [LICENSE](../LICENSE) file fo
 
 ---
 
-Part of the [CryptoXR Raffle](https://github.com/cyphertux/tux-raffle) project by [cyphertux.net](https://cyphertux.net) 🏴‍☠️
+Part of the [CryptoXR Raffle](https://github.com/cyphertux/cryptotux-raffle) project by [cyphertux.net](https://www.cyphertux.net) 🏴‍☠️
