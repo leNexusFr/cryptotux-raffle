@@ -95,7 +95,7 @@ The contract implements several security measures:
 
 ## License
 
-MIT License with Attribution Requirement - see the [LICENSE](../LICENSE) file for details.
+MIT License with Attribution Requirement - see the [LICENSE](../docs/LICENCE) file for details.
 
 ---
 
