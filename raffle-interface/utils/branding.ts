@@ -1,6 +1,6 @@
 /**
  * @file CryptoTux Raffle Branding
- * @copyright 2024 CypherTux
+ * @copyright 2025 CypherTux
  * @license MIT with Attribution
  * 
  * This file is protected by license.
@@ -15,7 +15,7 @@ export const SIGNATURES = {
     `,
     logo: '🏴‍☠️  CryptoTux Raffle',
     credit: 'by cyphertux.net',
-    repository: 'https://github.com/cyphertux/tux-raffle'
+    repository: 'https://github.com/cyphertux/cryptotux-raffle'
   } as const;
   
   export const logBranding = () => {
