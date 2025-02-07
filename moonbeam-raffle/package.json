@@ -1,0 +1,32 @@
+{
+  "name": "moonbeam-raffle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.2.0",
+    "@types/node": "^22.13.1",
+    "@types/source-map-support": "^0.5.10",
+    "dotenv": "^16.4.7",
+    "hardhat": "^2.22.1",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "overrides": {
+    "@nomicfoundation/hardhat-toolbox": {
+      "hardhat": "^2.22.1"
+    },
+    "hardhat": {
+      "@ethersproject/abi": "^5.7.0",
+      "@ethersproject/providers": "^5.7.2"
+    }
+  }
+}
