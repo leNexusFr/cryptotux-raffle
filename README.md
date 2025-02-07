@@ -54,5 +54,5 @@ This project is licensed under [LICENSE](./docs/LICENCE)
 
 ## Contact 📧
 
-- Website: [cyphertux.net](https://wwww.cyphertux.net)
+- Website: [cyphertux.net](https://www.cyphertux.net)
 - Twitter: [@cyphertux](https://twitter.com/cyphertux)
