@@ -4,7 +4,7 @@
 
 A decentralized, transparent, and verifiable raffle system built on blockchain technology.
 
-[Live Demo](https://raffle.cyphertux.net) | [Documentation](https://github.com/cyphertux/tux-raffle)
+[Live Demo](https://raffle.cyphertux.net) | [Documentation](https://github.com/cyphertux/cryptotux-raffle/docs)
 
 ## Overview
 
@@ -100,7 +100,7 @@ NETWORK=moonbase npx hardhat run scripts/deploy.ts --network moonbase
   - `REVEAL_VALUE` (optional locally)
 - Deploy
 
-Detailed deployment instructions in [DEPLOYMENT.md](./DEPLOYMENT.md)
+Detailed deployment instructions in [DEPLOYMENT.md](../docs/DEPLOYMENT.md)
 
 ## Key Features
 
@@ -115,9 +115,9 @@ Detailed deployment instructions in [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ## Documentation
 
-- [Deployment Guide](./DEPLOYMENT.md)
-- [Terms of Use](./raffle-interface/TERMS.md)
-- [Smart Contract README](./moonbeam-raffle/README.md)
+- [Deployment Guide](../docs/DEPLOYMENT.md)
+- [Terms of Use](./TERMS.md)
+- [Smart Contract README](../moonbeam-raffle/README.md)
 
 ## License
 
@@ -128,7 +128,7 @@ Copyright (c) 2024 CypherTux
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 1. The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-2. Any project using this Software must include a visible attribution link to https://github.com/cyphertux/cryptotux-raffle in their interface or documentation.
+2. Any project using this Software must include a visible attribution link to https://github.com/cyphertux/cryptotux-raffle/docs/LICENSE in their interface or documentation.
 
 ---
 

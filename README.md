@@ -4,7 +4,7 @@ A decentralized and verifiable raffle system built on Moonbeam Network.
 
 ## Project Structure 📂
 
-```
+```bash
 cryptotux-raffle/
 ├── RANDOMNESS.md          # Documentation on random number generation
 ├── README.md             # Main project documentation
@@ -22,7 +22,6 @@ cryptotux-raffle/
 │   │   └── participants.ts        # Participant management
 │   ├── scripts/        # Deployment and interaction scripts
 │   │   ├── deploy.ts             # Contract deployment
-│   │   ├── interact.ts           # Contract interaction
 │   │   └── verify-participants.ts # Verification tools
 │   └── ignition_backup/ # Deployment configurations backup
 │
@@ -34,10 +33,11 @@ cryptotux-raffle/
     ├── constants/      # Global constants and contracts
     ├── hooks/          # Custom React hooks
     ├── pages/          # Next.js page components
+    │   └── api/       # Secure API endpoints
     ├── public/         # Static assets and images
     ├── styles/         # Global styles and themes
     ├── types/          # TypeScript type definitions
-    └── utils/          # Utility functions and helpers
+    └── utils/          # Utility functions and raffle logic
 ```
 
 ## Quick Start 🚀
@@ -58,6 +58,7 @@ cd cryptotux-raffle
   - Custom VRF implementation
   - Transparent random number generation
   - On-chain verification
+  - API authentication
 
 - 🌐 **Multi-Network Support**
   - Moonbase Alpha (testnet)
@@ -70,8 +71,9 @@ cd cryptotux-raffle
 
 - 📱 **Modern Interface**
   - Responsive design
-  - Real-time updates
+  - Real-time WebSocket updates
   - User-friendly interactions
+  - 6-second block time optimization
 
 ## Documentation 📚
 
@@ -85,9 +87,10 @@ Comprehensive documentation available in the [docs](./docs) folder:
 
 - ✅ Smart Contract Implementation
 - ✅ Frontend Interface
+- ✅ API Authentication
+- ✅ WebSocket Integration
 - ✅ Basic Documentation
 - 🔄 Advanced Features (In Progress)
-- 🔄 Live Demo (Coming Soon)
 
 ## License 📄
 
