@@ -38,36 +38,35 @@ export function useRaffle(network: NetworkConfig) {
     try {
       console.log('Démarrage de l\'exécution du tirage...');
       
-      const response = await fetch('/api/trigger-drawing', {
+      const response = await fetch('/api/execute-drawing', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_SECRET}` // Ajout de cette ligne
         },
         body: JSON.stringify({ network: 'moonbase' })
       });
-  
+
       const data = await response.json();
-      
+
       if (!response.ok) {
-        // Amélioration de la gestion d'erreur
-        const errorMessage = data.details?.includes('transaction execution reverted')
-          ? 'Le tirage a déjà été exécuté ou n\'est pas encore possible'
+        const errorMessage = data.error === 'Unauthorized'
+          ? 'Erreur d\'authentification - Vérifiez NEXT_PUBLIC_API_SECRET'
           : data.error || 'Erreur lors de l\'exécution du tirage';
+        setError(errorMessage);
         throw new Error(errorMessage);
       }
-  
-      // Attendre un peu plus longtemps pour la confirmation
-      await new Promise(resolve => setTimeout(resolve, 12000));
-      await updateState();
-      
+
+      return data;
+
     } catch (error: any) {
       console.error('Erreur lors du tirage:', error);
-      setError(error.message);
+      throw error;
     } finally {
-      setIsExecuting(false);
       isExecutingRef.current = false;
+      setIsExecuting(false);
     }
-  };
+};
 
   const updateState = async () => {
     if (loading && isExecuting) return;

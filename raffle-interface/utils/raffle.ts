@@ -1,5 +1,7 @@
 import { WebSocketProvider, Wallet, Contract } from 'ethers';
 import { NETWORKS } from '../config/networks';
+import fs from 'fs';
+import path from 'path';
 
 const RAFFLE_ABI = [
   "function requestDrawing(bytes32 reveal) external",
@@ -11,6 +13,27 @@ const RAFFLE_ABI = [
 
 // Fonction pour attendre avec un délai
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Fonction pour récupérer la valeur reveal
+function getRevealValue(): string {
+  // D'abord essayer depuis les variables d'environnement
+  if (process.env.REVEAL_VALUE) {
+    return process.env.REVEAL_VALUE;
+  }
+
+  // Sinon essayer de lire le fichier .reveal
+  try {
+    const revealPath = path.join(process.cwd(), '..', 'moonbeam-raffle', '.reveal');
+    if (fs.existsSync(revealPath)) {
+      const revealHex = fs.readFileSync(revealPath, 'utf8');
+      return `0x${revealHex}`;
+    }
+  } catch (error) {
+    console.error('Error reading reveal file:', error);
+  }
+
+  throw new Error('REVEAL_VALUE not found in env or file');
+}
 
 // Fonction pour créer un provider avec retry
 async function createProvider(wsUrl: string, maxRetries = 3): Promise<WebSocketProvider> {
@@ -73,16 +96,14 @@ export async function executeDrawing(networkName: string) {
       };
     }
 
-    // Exécuter le tirage
-    const reveal = process.env.REVEAL_VALUE;
-    if (!reveal) {
-      throw new Error('REVEAL_VALUE not configured');
-    }
+    // Récupérer la valeur reveal
+    const reveal = getRevealValue();
 
     console.log("\n🎲 Executing drawing...");
     console.log(`   Network: ${network.name}`);
     console.log(`   Contract: ${network.contractAddress}`);
     console.log(`   Caller: ${wallet.address}`);
+    console.log(`   Reveal: ${reveal}`);
 
     const tx = await raffle.requestDrawing(reveal);
     console.log(`\n📤 Transaction sent: ${tx.hash}`);
