@@ -1,0 +1,56 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { executeDrawing } from '../../utils/raffle';
+import { NETWORKS } from '../../config/networks';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Récupérer le réseau depuis la requête ou utiliser le défaut
+  const networkName = (req.body.network as string) || 'moonbase';
+  const network = NETWORKS[networkName];
+
+  if (!network) {
+    return res.status(400).json({ 
+      error: 'Réseau non supporté',
+      details: `Le réseau ${networkName} n'est pas configuré`
+    });
+  }
+
+  try {
+    console.log(`\n🌐 Exécution sur ${network.name}...`);
+    
+    const result = await executeDrawing(networkName);
+    
+    // Formater la réponse sans dépendre des logs
+    return res.status(200).json({ 
+      success: true,
+      network: network.name,
+      details: {
+        status: result.status,
+        transactionHash: result.transactionHash,
+        explorerUrl: result.explorerUrl,
+        winners: result.winners,
+        ...(result.status === 'early' && {
+          currentBlock: result.currentBlock,
+          targetBlock: result.targetBlock,
+          remaining: result.remaining
+        })
+      }
+    });
+
+  } catch (error: any) {
+    console.error('\n❌ API Error:', error);
+    return res.status(500).json({ 
+      error: 'Failed to execute drawing',
+      network: network.name,
+      details: error.message,
+      stack: error.stack,
+      path: process.cwd()
+    });
+  }
+}
