@@ -23,10 +23,11 @@ cryptotux-raffle/
     ├── constants/         # Application constants
     ├── hooks/             # Custom React hooks
     ├── pages/             # Next.js pages & API routes
+    │   └── api/          # API endpoints for drawing execution
     ├── public/            # Static assets
     ├── styles/            # CSS & Tailwind styles
     ├── types/             # TypeScript definitions
-    └── utils/             # Utility functions
+    └── utils/             # Utility functions & raffle logic
 ```
 
 ## Prerequisites
@@ -50,8 +51,24 @@ cd ../raffle-interface && npm install
 
 # Configure environment
 cp moonbeam-raffle/.env.example moonbeam-raffle/.env
-cp raffle-interface/.env.example raffle-interface/.env
+cp raffle-interface/.env.example raffle-interface/.env.local
 # Edit .env files with your configuration
+```
+
+## Environment Variables
+
+### raffle-interface/.env.local
+```env
+# API Authentication
+API_SECRET=your_secret_here
+NEXT_PUBLIC_API_SECRET=your_secret_here
+
+# Blockchain
+PRIVATE_KEY=your_private_key
+NEXT_PUBLIC_DEFAULT_NETWORK=moonbase
+
+# Optional (prod): Override reveal value
+REVEAL_VALUE=0x...
 ```
 
 ## Development
@@ -59,10 +76,9 @@ cp raffle-interface/.env.example raffle-interface/.env
 ```bash
 # Start local development with Moonbase Alpha
 cd raffle-interface
-npm run dev:moonbase
+npm run dev
 
-# Or with Asset Hub Westend
-npm run dev:westend
+# Access the interface at http://localhost:3000
 ```
 
 ## Production Deployment
@@ -77,8 +93,11 @@ NETWORK=moonbase npx hardhat run scripts/deploy.ts --network moonbase
 - Push to GitHub
 - Import in Vercel
 - Configure required environment variables:
-  - `NEXT_PUBLIC_DEFAULT_NETWORK`
   - `API_SECRET`
+  - `NEXT_PUBLIC_API_SECRET`
+  - `PRIVATE_KEY`
+  - `NEXT_PUBLIC_DEFAULT_NETWORK`
+  - `REVEAL_VALUE` (optional locally)
 - Deploy
 
 Detailed deployment instructions in [DEPLOYMENT.md](./DEPLOYMENT.md)
@@ -92,7 +111,7 @@ Detailed deployment instructions in [DEPLOYMENT.md](./DEPLOYMENT.md)
 - 📱 Responsive design
 - ✅ On-chain result verification
 - 🔄 6-second block time optimization
-- 🛡️ Enhanced security measures
+- 🛡️ Enhanced security with API authentication
 
 ## Documentation
 
