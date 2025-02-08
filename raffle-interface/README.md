@@ -76,9 +76,22 @@ REVEAL_VALUE=0x...
 ```bash
 # Start local development with Moonbase Alpha
 cd raffle-interface
-npm run dev
+npm run dev:moonbase
+
+# Or with Asset Hub Westend
+npm run dev:westend
 
 # Access the interface at http://localhost:3000
+```
+
+> **Note**: If you encounter permission issues with the `source .env` command during development, you can modify the scripts in `package.json`:
+```json
+{
+  "scripts": {
+    "deploy:moonbase": "cd ../moonbeam-raffle && NETWORK=moonbase npx hardhat run scripts/deploy.ts --network moonbase",
+    "deploy:westend": "cd ../moonbeam-raffle && NETWORK=westend npx hardhat run scripts/deploy.ts --network westend"
+  }
+}
 ```
 
 ## Production Deployment
