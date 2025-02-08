@@ -66,10 +66,14 @@ NEXT_PUBLIC_API_SECRET=your_secret_here
 # Blockchain
 PRIVATE_KEY=your_private_key
 NEXT_PUBLIC_DEFAULT_NETWORK=moonbase
+NEXT_PUBLIC_CONTRACT_ADDRESS=0x... # Optional: Used if .contract file doesn't exist
 
 # Optional (prod): Override reveal value
 REVEAL_VALUE=0x...
 ```
+
+> **Note**: The contract address can be provided either through a `.contract` file in the `moonbeam-raffle` directory or via the `NEXT_PUBLIC_CONTRACT_ADDRESS` environment variable. The `.contract` file takes precedence if it exists.
+
 
 ## Development
 

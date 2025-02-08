@@ -56,6 +56,19 @@ NETWORK=moonbase npx hardhat run scripts/deploy.ts --network moonbase
 NETWORK=westend npx hardhat run scripts/deploy.ts --network westend
 ```
 
+## Contract Address Management
+
+After deployment, the contract address is automatically saved to a `.contract` file in the project root. This file is used by the interface to locate the deployed contract.
+
+```bash
+# The contract address is automatically written to .contract after deployment
+# You can also manually create/update it:
+echo "0xYourContractAddress" > .contract
+```
+
+> **Note**: If the `.contract` file exists, it takes precedence over any environment variables in the interface.
+
+
 ## Scripts
 
 - `deploy.ts`: Deploys contract and updates interface configuration

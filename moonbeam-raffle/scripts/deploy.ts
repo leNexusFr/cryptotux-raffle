@@ -75,6 +75,10 @@ async function main() {
   const revealPath = path.join(__dirname, "../.reveal");
   fs.writeFileSync(revealPath, Buffer.from(reveal).toString('hex'));
 
+  // Sauvegarder l'adresse du contrat
+  const contractPath = path.join(__dirname, "../.contract");
+  fs.writeFileSync(contractPath, raffleAddress);
+
   console.log(`\n✅ Raffle déployé avec succès sur ${network.name} !`);
   console.log(`\n📍 Informations de déploiement:`);
   console.log(`   Adresse: ${raffleAddress}`);

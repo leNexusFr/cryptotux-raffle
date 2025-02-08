@@ -23,7 +23,8 @@ Using this on a main network could lead to:
 ## Environment Variables
 
 ### Smart Contract (.env in moonbeam-raffle/)
-````bash
+````
+
 # Required - Your private key (without 0x prefix)
 PRIVATE_KEY=your_private_key_here
 
@@ -36,7 +37,8 @@ REVEAL_VALUE=0x...
 
 ### Frontend (.env.local in raffle-interface/)
 For local development:
-````bash
+````
+
 # Required - API Authentication
 API_SECRET=your_secret_here_min_32_chars
 NEXT_PUBLIC_API_SECRET=your_secret_here_min_32_chars  # Must match API_SECRET
@@ -45,8 +47,9 @@ NEXT_PUBLIC_API_SECRET=your_secret_here_min_32_chars  # Must match API_SECRET
 PRIVATE_KEY=your_private_key_here
 NEXT_PUBLIC_DEFAULT_NETWORK=moonbase
 
-# Optional - Override reveal value
+# Optional
 REVEAL_VALUE=0x...  # Must match the value used during deployment
+NEXT_PUBLIC_CONTRACT_ADDRESS=0x...  # Used if .contract file doesn't exist
 ````
 
 ### Frontend (Vercel Environment Variables)
@@ -55,12 +58,14 @@ To be configured in your Vercel project settings:
 - `NEXT_PUBLIC_API_SECRET`: Same as API_SECRET
 - `PRIVATE_KEY`: Your wallet's private key
 - `NEXT_PUBLIC_DEFAULT_NETWORK`: Network name (e.g., "moonbase")
+- `NEXT_PUBLIC_CONTRACT_ADDRESS`: Contract address (if .contract file not used)
 - `REVEAL_VALUE`: (Optional) Override reveal value
 
 ## Deployment Steps
 
 ### 1. Smart Contract Deployment
-````bash
+````
+
 # Go to contract folder
 cd moonbeam-raffle
 # Install dependencies
@@ -71,17 +76,19 @@ NETWORK=moonbase npx hardhat run scripts/deploy.ts --network moonbase
 
 The deployment script will:
 - Deploy the contract
-- Save the reveal value in .reveal
+- Save the reveal value in `.reveal`
+- Save the contract address in `.contract`
 - Update config/networks.ts with the new address
-- Display the contract address
+- Display the contract address and file locations
 
 ### 2. Frontend Deployment
 1. Verify that config/networks.ts is updated with the correct address
-2. Push your code to GitHub
-3. Create a new project in Vercel
-4. Import your repository
-5. Configure environment variables
-6. Deploy
+2. Backup `.contract` and `.reveal` files securely
+3. Push your code to GitHub (excluding .env, .reveal, and .contract files)
+4. Create a new project in Vercel
+5. Import your repository
+6. Configure environment variables
+7. Deploy
 
 ### Vercel Configuration
 - Build Command: `npm run build`
@@ -105,11 +112,16 @@ The deployment script will:
 
 2. **Frontend API Errors**
    - Verify that API_SECRET and NEXT_PUBLIC_API_SECRET match
-   - Check that the contract address is correct in networks.ts
+   - Check that the contract address is correct in networks.ts or .contract file
    - Verify REVEAL_VALUE if overridden
    - Check Vercel logs for more details
 
-3. **Authentication Errors**
+3. **Contract Address Issues**
+   - Verify `.contract` file exists and contains correct address
+   - Check `NEXT_PUBLIC_CONTRACT_ADDRESS` if `.contract` file not used
+   - Ensure contract address matches the deployed network
+
+4. **Authentication Errors**
    - Ensure API_SECRET is properly set in both environments
    - Verify NEXT_PUBLIC_API_SECRET is accessible in the frontend
    - Check authorization headers in API calls

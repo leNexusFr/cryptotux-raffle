@@ -27,6 +27,27 @@ const invalidCodes = participants.filter(p =>
 
 ## Network Configuration
 
+### Contract Address Management
+The contract address can be managed in two ways:
+1. Using `.contract` file (recommended)
+2. Using environment variables
+
+#### Option 1: .contract File
+````
+
+# Automatically generated during deployment
+# Or manually create in moonbeam-raffle/.contract
+echo "0xYourContractAddress" > .contract
+````
+
+#### Option 2: Environment Variable
+````
+
+// in .env.local or Vercel
+NEXT_PUBLIC_CONTRACT_ADDRESS=0x...
+````
+
+### Network Settings
 Add or modify networks:
 ````
 
@@ -70,6 +91,7 @@ NEXT_PUBLIC_API_SECRET=your_secret_here  // Must match API_SECRET
 
 // Optional
 REVEAL_VALUE=0x...  // Override default reveal value
+NEXT_PUBLIC_CONTRACT_ADDRESS=0x...  // Used if .contract file doesn't exist
 ````
 
 ## UI Customization
