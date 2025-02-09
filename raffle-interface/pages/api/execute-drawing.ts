@@ -34,11 +34,11 @@ export default async function handler(
       ...result
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error:', error);
     return res.status(500).json({ 
       error: 'Failed to execute drawing',
-      details: error.message
+      details: error instanceof Error ? error.message : String(error)
     });
   }
 }
