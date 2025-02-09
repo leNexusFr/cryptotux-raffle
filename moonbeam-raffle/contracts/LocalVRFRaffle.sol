@@ -20,6 +20,7 @@ contract LocalVRFRaffle is ReentrancyGuard, Pausable, Ownable(msg.sender) {
     // Constants
     uint256 public constant MAX_PARTICIPANTS = 1000;
     uint256 public constant MIN_PARTICIPANTS = 3;
+    uint256 private immutable BLOCKS_UNTIL_DRAW;
 
     // Structures
     struct DrawingResult {
@@ -63,6 +64,7 @@ contract LocalVRFRaffle is ReentrancyGuard, Pausable, Ownable(msg.sender) {
             "Commit hash cannot be zero");
         
         participantIds = _participantIds;
+        BLOCKS_UNTIL_DRAW = _blocksUntilDraw;
         targetBlock = block.number + _blocksUntilDraw;
         commitHash = _commitHash;
         authorizedDrawers[msg.sender] = true;
@@ -179,6 +181,12 @@ contract LocalVRFRaffle is ReentrancyGuard, Pausable, Ownable(msg.sender) {
     /// @notice Vérifie si un tirage peut être effectué
     function canDraw() external view returns (bool) {
         return block.number >= targetBlock && !isDrawingComplete && !paused();
+    }
+
+    /// @notice Récupère le nombre de blocs configuré pour le tirage
+    /// @return Le nombre de blocs entre le déploiement et le tirage
+    function getBlocksUntilDraw() external view returns (uint256) {
+        return BLOCKS_UNTIL_DRAW;
     }
 
     /// @notice Pause le contrat
