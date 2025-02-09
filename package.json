@@ -1,0 +1,15 @@
+{
+    "name": "cryptotux-raffle",
+    "private": true,
+    "workspaces": [
+      "moonbeam-raffle",
+      "raffle-interface"
+    ],
+    "scripts": {
+      "install:all": "npm install",
+      "dev:interface": "cd raffle-interface && npm run dev",
+      "deploy:contract": "cd moonbeam-raffle && npx hardhat run scripts/deploy.ts",
+      "dev:moonbase": "cd raffle-interface && npm run dev:moonbase",
+      "dev:westend": "cd raffle-interface && npm run dev:westend"
+    }
+  }
