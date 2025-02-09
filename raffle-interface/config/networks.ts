@@ -25,6 +25,7 @@ export interface NetworkConfig {
     "rpcUrl": "https://westend-asset-hub-eth-rpc.polkadot.io",
     "wsUrl": "wss://westend-asset-hub-eth-rpc.polkadot.io",
     "chainId": 420420421,
+    "contractAddress": "",
     "explorerUrl": "https://westend-asset-hub-eth-explorer.parity.io",
     "symbol": "WND",
     "blockTime": 6
