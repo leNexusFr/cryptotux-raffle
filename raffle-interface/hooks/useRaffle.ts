@@ -7,7 +7,9 @@ const RAFFLE_ABI = [
   "function isDrawingComplete() view returns (bool)",
   "function targetBlock() view returns (uint256)",
   "function getWinnerIds() view returns (uint256[3])",
-  "function requestDrawing() external"
+  "function requestDrawing() external",
+  "function getBlocksUntilDraw() external view returns (uint256)",
+  "event DrawingInitiated(uint256 indexed targetBlock, uint256[] participants)"
 ];
 
 export function useRaffle(network: NetworkConfig) {
@@ -42,7 +44,7 @@ export function useRaffle(network: NetworkConfig) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_SECRET}` // Ajout de cette ligne
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_API_SECRET}` 
         },
         body: JSON.stringify({ network: 'moonbase' })
       });
@@ -68,31 +70,41 @@ export function useRaffle(network: NetworkConfig) {
     }
 };
 
-  const updateState = async () => {
-    if (loading && isExecuting) return;
+const updateState = async () => {
+  if (loading && isExecuting) return;
+
+  let provider: ethers.JsonRpcProvider | null = null;
   
-    let provider: ethers.JsonRpcProvider | null = null;
+  try {
+    provider = new ethers.JsonRpcProvider(network.rpcUrl);
+    const contract = new ethers.Contract(
+      network.contractAddress || '', 
+      RAFFLE_ABI, 
+      provider
+    );
+
+    if (initialBlockRef.current === 0) {
+      try {
+        const [currentBlock, targetBlock, blocksUntilDraw] = await Promise.all([
+          provider.getBlockNumber(),
+          contract.targetBlock(),
+          contract.getBlocksUntilDraw() 
+        ]);
     
-    try {
-      provider = new ethers.JsonRpcProvider(network.rpcUrl);
-      const contract = new ethers.Contract(
-        network.contractAddress || '', 
-        RAFFLE_ABI, 
-        provider
-      );
-  
-      const [current, target, complete] = await Promise.all([
-        provider.getBlockNumber(),
-        contract.targetBlock(),
-        contract.isDrawingComplete()
-      ]);
-  
-      // Définir initialBlock UNE SEULE FOIS
-      if (initialBlockRef.current === 0) {
-        initialBlockRef.current = current;
-        setInitialBlock(current);
-        console.log('Premier bloc défini (une seule fois):', current);
+        const deploymentBlock = Number(targetBlock) - Number(blocksUntilDraw);
+        initialBlockRef.current = deploymentBlock;
+        setInitialBlock(deploymentBlock);
+        console.log('Bloc de déploiement:', deploymentBlock);
+      } catch (e) {
+        console.error('Erreur lors de la récupération du bloc de déploiement:', e);
       }
+    }
+
+    const [current, target, complete] = await Promise.all([
+      provider.getBlockNumber(),
+      contract.targetBlock(),
+      contract.isDrawingComplete()
+    ]);
   
       setCurrentBlock(current);
       setTargetBlock(Number(target));
