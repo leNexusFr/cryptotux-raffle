@@ -28,20 +28,20 @@ interface HelpModalProps {
                 <span className="font-medium">🎲 Principe</span><br/>
                 Un tirage au sort décentralisé et vérifiable sur la blockchain.
               </p>
-  
+
               <p className="text-sm text-gray-500 dark:text-gray-300">
                 <span className="font-medium">⏳ Déroulement</span><br/>
-                Le tirage s'effectue automatiquement une fois le bloc cible atteint.
+                Le tirage s&apos;effectue automatiquement une fois le bloc cible atteint.
               </p>
-  
+
               <p className="text-sm text-gray-500 dark:text-gray-300">
                 <span className="font-medium">🔒 Sécurité</span><br/>
-                Utilisation d'un système VRF pour garantir l'aléatoire et la transparence.
+                Utilisation d&apos;un système VRF pour garantir l&apos;aléatoire et la transparence.
               </p>
-  
+
               <p className="text-sm text-gray-500 dark:text-gray-300">
                 <span className="font-medium">✅ Vérification</span><br/>
-                Tous les résultats sont vérifiables sur la blockchain via le bouton "Vérifier".
+                Tous les résultats sont vérifiables sur la blockchain via le bouton &quot;Vérifier&quot;.
               </p>
             </div>
   
@@ -51,7 +51,7 @@ interface HelpModalProps {
                 onClick={() => setIsOpen(false)}
                 className="inline-flex justify-center rounded-md bg-blue-100 dark:bg-blue-900 px-4 py-2 text-sm font-medium text-blue-900 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
               >
-                J'ai compris
+                J&apos;ai compris
               </button>
             </div>
           </div>
