@@ -15,7 +15,7 @@ export interface NetworkConfig {
     "rpcUrl": "https://rpc.api.moonbase.moonbeam.network",
     "wsUrl": "wss://wss.api.moonbase.moonbeam.network",
     "chainId": 1287,
-    "contractAddress": "0x634C49bEF10D7070f25A5AD264D950CBD17ee292",
+    "contractAddress": "0xB8ea142b9C873CEeFD39F66af0DA4C943Fbf1eb8",
     "explorerUrl": "https://moonbase.moonscan.io",
     "symbol": "DEV",
     "blockTime": 6
