@@ -20,7 +20,7 @@ async function main() {
   const currentBlock = await ethers.provider.getBlockNumber();
   
   // Définir quand le tirage aura lieu
-  const BLOCKS_UNTIL_DRAW = 40;
+  const BLOCKS_UNTIL_DRAW = 6000;
   
   console.log(`\n📊 Informations de bloc:`);
   console.log(`   Bloc actuel: ${currentBlock}`);
