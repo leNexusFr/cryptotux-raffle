@@ -38,7 +38,7 @@ export default function Home() {
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-colors my-6">
         <div className="px-4 py-8 sm:p-8">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-8 transition-colors">
-              Tirage Test sur {network.name}
+              Tirage CryptoXR 2025 
             </h1>
 
             {error && (
@@ -75,10 +75,11 @@ export default function Home() {
           rel="noopener noreferrer"
           className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors inline-flex items-center gap-1"
         >
-          By cyphertux.net{' '}
+          By cyphertux.net{' '} 
           <span role="img" aria-label="pirate flag" className="transform hover:scale-110 transition-transform">
             🏴‍☠️
           </span>
+          for 🥐 Le Nexus 🍷 
         </a>
       </footer>
 
