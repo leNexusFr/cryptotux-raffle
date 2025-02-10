@@ -8,7 +8,6 @@ export function DrawingStatus({
   targetBlock, 
   blocksRemaining, 
   secondsLeft,
-  progressPercentage,
   smoothProgress, 
   formatTimeRemaining 
 }: DrawingStatusProps) {
